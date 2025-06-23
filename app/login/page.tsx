@@ -133,7 +133,7 @@ export default function LoginPage() {
                 البريد الإلكتروني
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400" size={20} />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400 pointer-events-none" size={20} />
                 <input
                   id="email"
                   name="email"
@@ -141,7 +141,7 @@ export default function LoginPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="input-field pl-10"
+                  className="w-full bg-dark-800 border border-dark-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="أدخل بريدك الإلكتروني"
                 />
               </div>
@@ -152,7 +152,7 @@ export default function LoginPage() {
                 كلمة المرور
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400" size={20} />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400 pointer-events-none" size={20} />
                 <input
                   id="password"
                   name="password"
@@ -160,13 +160,13 @@ export default function LoginPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="input-field pl-10 pr-10"
+                  className="w-full bg-dark-800 border border-dark-600 rounded-lg py-3 pl-10 pr-10 text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="أدخل كلمة المرور"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-400 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-400 hover:text-white focus:outline-none"
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>

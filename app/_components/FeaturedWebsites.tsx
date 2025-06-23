@@ -23,17 +23,18 @@ interface Website {
   isResponsive: boolean;
   hasAdminPanel: boolean;
   hasDatabase: boolean;
+  discountPercent?: number;
+  finalPrice?: number;
 }
 
 export default function FeaturedWebsites() {
   const [websites, setWebsites] = useState<Website[]>([]);
   const [loading, setLoading] = useState(true);
   const { ref, isInView } = useSectionInView({ threshold: 0.2 });
-
   useEffect(() => {
     fetchFeaturedWebsites();
   }, []);
-
+  
   const fetchFeaturedWebsites = async () => {
     try {
       const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.WEBSITES.AVAILABLE));
@@ -123,9 +124,23 @@ export default function FeaturedWebsites() {
                   </div>
                 )}
                 <div className="absolute top-4 right-4 bg-dark-900/80 backdrop-blur-sm rounded-lg px-2 py-1">
-                  <span className="text-red-400 font-semibold text-sm">
-                    ${website.price}
-                  </span>
+                  {website.discountPercent && website.finalPrice && website.discountPercent > 0 ? (
+                    <span className="flex items-center gap-2">
+                      <span className="text-dark-400 line-through text-xs">
+                        ${website.price}
+                      </span>
+                      <span className="bg-red-600 text-white px-1 py-0.5 rounded text-xs">
+                        -{website.discountPercent}%
+                      </span>
+                      <span className="text-red-400 font-semibold text-sm">
+                        ${website.finalPrice}
+                      </span>
+                    </span>
+                  ) : (
+                    <span className="text-red-400 font-semibold text-sm">
+                      ${website.price}
+                    </span>
+                  )}
                 </div>
               </div>
 

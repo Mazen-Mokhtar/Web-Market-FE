@@ -122,7 +122,7 @@ export default function RegisterPage() {
                   Full Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400" size={20} />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400 pointer-events-none" size={20} />
                   <input
                     id="name"
                     name="name"
@@ -130,7 +130,7 @@ export default function RegisterPage() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="input-field pl-10"
+                    className="w-full bg-dark-800 border border-dark-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -141,7 +141,7 @@ export default function RegisterPage() {
                   Email Address
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400" size={20} />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400 pointer-events-none" size={20} />
                   <input
                     id="email"
                     name="email"
@@ -149,7 +149,7 @@ export default function RegisterPage() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="input-field pl-10"
+                    className="w-full bg-dark-800 border border-dark-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -160,7 +160,7 @@ export default function RegisterPage() {
                   Phone Number
                 </label>
                 <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400" size={20} />
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400 pointer-events-none" size={20} />
                   <input
                     id="phone"
                     name="phone"
@@ -168,7 +168,7 @@ export default function RegisterPage() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="input-field pl-10"
+                    className="w-full bg-dark-800 border border-dark-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Enter your phone number"
                   />
                 </div>
@@ -179,7 +179,7 @@ export default function RegisterPage() {
                   Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400" size={20} />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400 pointer-events-none" size={20} />
                   <input
                     id="password"
                     name="password"
@@ -187,13 +187,13 @@ export default function RegisterPage() {
                     required
                     value={formData.password}
                     onChange={handleChange}
-                    className="input-field pl-10 pr-10"
+                    className="w-full bg-dark-800 border border-dark-600 rounded-lg py-3 pl-10 pr-10 text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Enter your password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-400 hover:text-white transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-400 hover:text-white focus:outline-none"
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
@@ -205,7 +205,7 @@ export default function RegisterPage() {
                   Confirm Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400" size={20} />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-400 pointer-events-none" size={20} />
                   <input
                     id="cPassword"
                     name="cPassword"
@@ -213,13 +213,13 @@ export default function RegisterPage() {
                     required
                     value={formData.cPassword}
                     onChange={handleChange}
-                    className="input-field pl-10 pr-10"
+                    className="w-full bg-dark-800 border border-dark-600 rounded-lg py-3 pl-10 pr-10 text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Confirm your password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-400 hover:text-white transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-400 hover:text-white focus:outline-none"
                   >
                     {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>

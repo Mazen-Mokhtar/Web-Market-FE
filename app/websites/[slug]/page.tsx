@@ -65,6 +65,7 @@ interface Website {
   likes: string[];
   viewsCount: number;
   createdAt: string;
+  finalPrice?: number;
 }
 
 export default function WebsiteDetailPage() {
@@ -374,18 +375,18 @@ export default function WebsiteDetailPage() {
             {/* Price Card */}
             <div className="bg-dark-800 rounded-xl p-6 border border-dark-700 mb-6 sticky top-6">
               <div className="text-center mb-6">
-                {website.originalPrice && website.originalPrice > website.price && (
+                {website.discountPercent && website.finalPrice && website.discountPercent > 0 ? (
                   <div className="flex items-center justify-center space-x-2 space-x-reverse mb-2">
                     <span className="text-dark-400 line-through text-lg">
-                      {formatCurrency(website.originalPrice)}
+                      {formatCurrency(website.price)}
                     </span>
                     <span className="bg-red-600 text-white px-2 py-1 rounded text-sm">
                       -{website.discountPercent}%
                     </span>
                   </div>
-                )}
+                ) : null}
                 <div className="text-3xl font-bold text-white mb-2">
-                  {formatCurrency(website.price)}
+                  {formatCurrency(website.finalPrice && website.discountPercent && website.discountPercent > 0 ? website.finalPrice : website.price)}
                 </div>
                 <p className="text-dark-400 text-sm">سعر نهائي شامل كل شيء</p>
               </div>

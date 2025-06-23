@@ -25,6 +25,8 @@ interface Website {
     _id: string;
     name: string;
   };
+  discountPercent: number;
+  finalPrice: number;
 }
 
 interface Category {
@@ -56,6 +58,7 @@ export default function WebsitesPage() {
   useEffect(() => {
     fetchWebsites();
     fetchCategories();
+    scrollTo(0,0)
   }, [searchTerm, selectedCategory, selectedType, sortBy, sortOrder]);
 
   const fetchWebsites = async () => {
@@ -72,7 +75,17 @@ export default function WebsitesPage() {
 
       const response = await fetch(`${url}${params.toString()}`);
       const data = await response.json();
-      setWebsites(Array.isArray(data) ? data : []);
+      let websitesArr = Array.isArray(data) ? data : [];
+      // ترتيب حسب السعر الفعلي (finalPrice أو price) إذا كان sortBy هو price
+      if (sortBy === 'price') {
+        const getEffectivePrice = (w: any) => (w.finalPrice && w.discountPercent > 0 ? w.finalPrice : w.price);
+        websitesArr = websitesArr.sort((a, b) =>
+          sortOrder === 'asc'
+            ? getEffectivePrice(a) - getEffectivePrice(b)
+            : getEffectivePrice(b) - getEffectivePrice(a)
+        );
+      }
+      setWebsites(websitesArr);
     } catch (error) {
       console.error('Error fetching websites:', error);
       setWebsites([]);
@@ -272,9 +285,23 @@ export default function WebsitesPage() {
                     </div>
                   )}
                   <div className="absolute top-4 right-4 bg-dark-900/80 backdrop-blur-sm rounded-lg px-2 py-1">
-                    <span className="text-red-400 font-semibold text-sm">
-                      ${website.price}
-                    </span>
+                    {website.discountPercent && website.finalPrice && website.discountPercent > 0 ? (
+                      <span className="flex items-center gap-2">
+                        <span className="text-dark-400 line-through text-xs">
+                          ${website.price}
+                        </span>
+                        <span className="bg-red-600 text-white px-1 py-0.5 rounded text-xs">
+                          -{website.discountPercent}%
+                        </span>
+                        <span className="text-red-400 font-semibold text-sm">
+                          ${website.finalPrice}
+                        </span>
+                      </span>
+                    ) : (
+                      <span className="text-red-400 font-semibold text-sm">
+                        ${website.price}
+                      </span>
+                    )}
                   </div>
                 </div>
 

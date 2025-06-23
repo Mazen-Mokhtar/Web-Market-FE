@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
-  Globe, 
-  Search, 
-  Plus, 
-  Eye, 
-  Edit, 
+import {
+  Globe,
+  Search,
+  Plus,
+  Eye,
+  Edit,
   Trash2,
   ExternalLink,
   DollarSign,
@@ -72,6 +72,7 @@ export default function MyWebsitesPage() {
 
   useEffect(() => {
     checkAuthAndFetchWebsites();
+    scrollTo(0, 0)
   }, []);
 
   const checkAuthAndFetchWebsites = async () => {
@@ -95,7 +96,7 @@ export default function MyWebsitesPage() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      
+
       const response = await fetch(buildApiUrl('/websites/my-websites'), {
         headers: {
           'Authorization': token || '',
@@ -177,7 +178,7 @@ export default function MyWebsitesPage() {
   };
 
   const getTypeColor = (type: string) => {
-    const colors = {
+    const colors: Record<string, string> = {
       ecommerce: 'text-blue-400 bg-blue-900/30',
       blog: 'text-green-400 bg-green-900/30',
       portfolio: 'text-purple-400 bg-purple-900/30',
@@ -191,10 +192,10 @@ export default function MyWebsitesPage() {
 
   const filteredWebsites = websites.filter(website => {
     const matchesSearch = website.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         website.description.toLowerCase().includes(searchTerm.toLowerCase());
+      website.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = !statusFilter || website.status === statusFilter;
     const matchesType = !typeFilter || website.type === typeFilter;
-    
+
     return matchesSearch && matchesStatus && matchesType;
   });
 
@@ -221,21 +222,21 @@ export default function MyWebsitesPage() {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">مواقعي</h1>
-              <p className="text-dark-300">إدارة وعرض جميع مواقعك</p>
+              <h1 className="text-3xl font-bold text-white mb-2">مواقعي المشتراة</h1>
+              <p className="text-dark-300">هنا يمكنك إدارة وعرض جميع المواقع التي قمت بشرائها من المنصة</p>
             </div>
             <button
-              onClick={() => router.push('/websites/create')}
+              onClick={() => router.push('/websites')}
               className="btn-primary flex items-center space-x-2 space-x-reverse"
             >
               <Plus size={20} />
-              <span>إضافة موقع جديد</span>
+              <span>شراء ويب سايت</span>
             </button>
           </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-8">
           <div className="bg-dark-800 rounded-xl p-6 border border-dark-700">
             <div className="flex items-center justify-between">
               <div>
@@ -244,42 +245,6 @@ export default function MyWebsitesPage() {
               </div>
               <div className="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center">
                 <Globe className="text-blue-400" size={24} />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-dark-800 rounded-xl p-6 border border-dark-700">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-dark-400 text-sm font-medium">متاح للبيع</p>
-                <p className="text-2xl font-bold text-white">{availableWebsites}</p>
-              </div>
-              <div className="w-12 h-12 bg-green-900/30 rounded-lg flex items-center justify-center">
-                <Tag className="text-green-400" size={24} />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-dark-800 rounded-xl p-6 border border-dark-700">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-dark-400 text-sm font-medium">تم البيع</p>
-                <p className="text-2xl font-bold text-white">{soldWebsites}</p>
-              </div>
-              <div className="w-12 h-12 bg-red-900/30 rounded-lg flex items-center justify-center">
-                <DollarSign className="text-red-400" size={24} />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-dark-800 rounded-xl p-6 border border-dark-700">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-dark-400 text-sm font-medium">إجمالي المشاهدات</p>
-                <p className="text-2xl font-bold text-white">{totalViews}</p>
-              </div>
-              <div className="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center">
-                <TrendingUp className="text-purple-400" size={24} />
               </div>
             </div>
           </div>
@@ -344,13 +309,13 @@ export default function MyWebsitesPage() {
         {filteredWebsites.length === 0 ? (
           <div className="text-center py-12">
             <Globe className="mx-auto h-12 w-12 text-dark-400 mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">لا توجد مواقع</h3>
-            <p className="text-dark-400 mb-4">ابدأ بإضافة موقعك الأول</p>
+            <h3 className="text-xl font-semibold text-white mb-2">لا توجد مواقع مشتراة</h3>
+            <p className="text-dark-400 mb-4">قم بشراء موقع من السوق ليظهر هنا</p>
             <button
-              onClick={() => router.push('/websites/create')}
+              onClick={() => router.push('/websites')}
               className="btn-primary"
             >
-              إضافة موقع جديد
+              شراء ويب سايت
             </button>
           </div>
         ) : (

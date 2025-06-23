@@ -212,7 +212,7 @@ export class WebsiteService {
   }
 
   async getUserWebsites(userId: string): Promise<Website[]> {
-    return await this.websiteRepository.findAll({ createdBy: userId });
+    return await this.websiteRepository.findAll({ soldTo: userId });
   }
 
   async searchWebsites(searchTerm: string): Promise<Website[]> {

@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
-  Users, 
-  Globe, 
-  DollarSign, 
-  TrendingUp, 
-  Eye, 
+import {
+  Users,
+  Globe,
+  DollarSign,
+  TrendingUp,
+  Eye,
   Plus,
   Settings,
   BarChart3,
@@ -67,6 +67,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     checkAdminAccess();
     fetchDashboardData();
+    scrollTo(0, 0)
   }, []);
 
   const checkAdminAccess = () => {
@@ -307,14 +308,12 @@ export default function AdminDashboard() {
                   </div>
                   <div className="text-right">
                     <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 rounded text-xs ${
-                        user.isConfirm ? 'text-green-400 bg-green-900/30' : 'text-yellow-400 bg-yellow-900/30'
-                      }`}>
+                      <span className={`px-2 py-1 rounded text-xs ${user.isConfirm ? 'text-green-400 bg-green-900/30' : 'text-yellow-400 bg-yellow-900/30'
+                        }`}>
                         {user.isConfirm ? 'Verified' : 'Pending'}
                       </span>
-                      <span className={`px-2 py-1 rounded text-xs ${
-                        user.role === 'admin' ? 'text-red-400 bg-red-900/30' : 'text-blue-400 bg-blue-900/30'
-                      }`}>
+                      <span className={`px-2 py-1 rounded text-xs ${user.role === 'admin' ? 'text-red-400 bg-red-900/30' : 'text-blue-400 bg-blue-900/30'
+                        }`}>
                         {user.role}
                       </span>
                     </div>

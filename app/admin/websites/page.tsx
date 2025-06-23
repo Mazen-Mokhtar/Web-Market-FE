@@ -46,6 +46,8 @@ interface Website {
     email: string;
   };
   createdAt: string;
+  discountPercent: number;
+  finalPrice: number;
 }
 
 export default function AdminWebsites() {
@@ -304,9 +306,23 @@ export default function AdminWebsites() {
                     </span>
                   </div>
                   <div className="absolute bottom-4 right-4 bg-dark-900/80 backdrop-blur-sm rounded-lg px-2 py-1">
-                    <span className="text-red-400 font-semibold text-sm">
-                      {formatCurrency(website.price)}
-                    </span>
+                    {website.discountPercent && website.finalPrice && website.discountPercent > 0 ? (
+                      <span className="flex items-center gap-2">
+                        <span className="text-dark-400 line-through text-xs">
+                          {formatCurrency(website.price)}
+                        </span>
+                        <span className="bg-red-600 text-white px-1 py-0.5 rounded text-xs">
+                          -{website.discountPercent}%
+                        </span>
+                        <span className="text-red-400 font-semibold text-sm">
+                          {formatCurrency(website.finalPrice)}
+                        </span>
+                      </span>
+                    ) : (
+                      <span className="text-red-400 font-semibold text-sm">
+                        {formatCurrency(website.price)}
+                      </span>
+                    )}
                   </div>
                 </div>
 

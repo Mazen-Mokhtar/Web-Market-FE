@@ -51,6 +51,9 @@ export class Website {
     @Prop({ type: Number, required: false })
     discountPercent?: number;
 
+    @Prop({ type: Number, required: false })
+    finalPrice?: number;
+
     @Prop({ type: String, enum: WebsiteType, required: true })
     type: WebsiteType;
 
@@ -116,6 +119,18 @@ export class Website {
 }
 
 export const websiteSchema = SchemaFactory.createForClass(Website);
+
+websiteSchema.pre("save", function (next) {
+    if (this.discountPercent && this.discountPercent > 0) {
+        this.finalPrice = this.price - (this.price * this.discountPercent / 100);
+    } else {
+        this.finalPrice = undefined;
+        if (this.isModified && this.isModified('finalPrice')) {
+            this.finalPrice = undefined;
+        }
+    }
+    next();
+});
 
 websiteSchema.pre("updateOne", function (next) {
     const update = this.getUpdate()

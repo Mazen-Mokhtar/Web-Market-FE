@@ -23,6 +23,7 @@ export default function CategoriesPage() {
 
   useEffect(() => {
     fetchCategories();
+    scrollTo(0,0)
   }, []);
 
   const fetchCategories = async () => {
